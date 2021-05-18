@@ -2,11 +2,36 @@ class Classes {
   final String subject;
   final String type;
   final String teacherName;
+  final String joinLink;
   final DateTime time;
   bool isPassed = false;
   bool isHappening = false;
 
-  Classes({this.subject, this.type, this.teacherName, this.time});
+  Classes({
+    this.subject,
+    this.type,
+    this.teacherName,
+    this.joinLink,
+    this.time,
+  });
+
+  factory Classes.fromMap(Map<String, dynamic> snapshot) => Classes(
+        subject: snapshot['subject'],
+        type: snapshot['type'],
+        teacherName: snapshot['teacherName'],
+        joinLink: snapshot['joinLink'],
+        time: (snapshot['time'] != null)
+            ? DateTime.parse(snapshot['time'])
+            : DateTime.now(),
+      );
+
+  toMap() => {
+        'subject': subject,
+        'type': type,
+        'teacherName': teacherName,
+        'joinLink': joinLink,
+        'time': time,
+      };
 }
 
 List<Classes> classes = [

@@ -12,15 +12,43 @@ class UserDBServices {
     FirebaseFirestore firestoreDB = FirebaseFirestore.instance;
     User _currUser = FirebaseAuth.instance.currentUser;
 
-    // Send Verification Email
-    _currUser.sendEmailVerification();
-
     assert(_currUser is User);
     // Adds a user using `uid` of Firebase_auth as primary key
     await firestoreDB
         .collection(usersCollection)
         .doc(_currUser.uid)
         .set(_user.toJson(), SetOptions(merge: true));
+  }
+
+  static Future<void> updateProfilePictureUrl(
+      String uid, String profilePictureUrl) async {
+    FirebaseFirestore firestoreDB = FirebaseFirestore.instance;
+
+    await firestoreDB.collection(usersCollection).doc(uid).update(
+      {
+        'profilePictureUrl': profilePictureUrl,
+      },
+    );
+  }
+
+  static Future<void> updateName(String uid, String Name) async {
+    FirebaseFirestore firestoreDB = FirebaseFirestore.instance;
+
+    await firestoreDB.collection(usersCollection).doc(uid).update(
+      {
+        'name': Name,
+      },
+    );
+  }
+
+  static Future<void> updateAge(String uid, int Age) async {
+    FirebaseFirestore firestoreDB = FirebaseFirestore.instance;
+
+    await firestoreDB.collection(usersCollection).doc(uid).update(
+      {
+        'age': Age,
+      },
+    );
   }
 
   // Fetches User Data from Collection
