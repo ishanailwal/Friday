@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:class_manager/constants.dart';
+import 'package:friday/constants.dart';
 
 class CanvasDesign extends CustomPainter {
   final BuildContext context;
@@ -12,7 +12,7 @@ class CanvasDesign extends CustomPainter {
         largestCircleCenter = Offset(size.width * .7, size.height * 0.05);
 
     final paint = Paint()
-      ..color = Theme.of(context).accentColor.withGreen(100)
+      ..color = Theme.of(context).colorScheme.secondary.withGreen(100)
       ..style = PaintingStyle.fill;
 
     final sideCurve = new Path()

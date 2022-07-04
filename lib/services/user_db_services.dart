@@ -1,6 +1,6 @@
-import 'package:class_manager/constants.dart';
-import 'package:class_manager/models/users.dart';
-import 'package:class_manager/services/user_info_services.dart';
+import 'package:friday/constants.dart';
+import 'package:friday/models/users.dart';
+import 'package:friday/services/user_info_services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -31,22 +31,22 @@ class UserDBServices {
     );
   }
 
-  static Future<void> updateName(String uid, String Name) async {
+  static Future<void> updateName(String uid, String name) async {
     FirebaseFirestore firestoreDB = FirebaseFirestore.instance;
 
     await firestoreDB.collection(usersCollection).doc(uid).update(
       {
-        'name': Name,
+        'name': name,
       },
     );
   }
 
-  static Future<void> updateAge(String uid, int Age) async {
+  static Future<void> updateAge(String uid, int age) async {
     FirebaseFirestore firestoreDB = FirebaseFirestore.instance;
 
     await firestoreDB.collection(usersCollection).doc(uid).update(
       {
-        'age': Age,
+        'age': age,
       },
     );
   }

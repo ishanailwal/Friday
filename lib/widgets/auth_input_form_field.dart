@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:class_manager/constants.dart';
+import 'package:friday/constants.dart';
 
 class AuthInputField extends StatefulWidget {
   final Widget suffixIcon;
@@ -8,7 +8,7 @@ class AuthInputField extends StatefulWidget {
   final TextInputAction textInputAction;
   final TextEditingController controller;
   final String Function(String) validator;
-  TextInputType textInputType;
+  final TextInputType textInputType;
   AuthInputField({
     this.textInputType = TextInputType.text,
     @required this.controller,

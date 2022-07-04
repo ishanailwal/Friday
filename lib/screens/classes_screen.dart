@@ -1,10 +1,10 @@
-import 'package:class_manager/models/users.dart';
-import 'package:class_manager/services/classes_db_services.dart';
+import 'package:friday/models/users.dart';
+import 'package:friday/services/classes_db_services.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:class_manager/constants.dart';
-import 'package:class_manager/widgets/build_classes.dart';
-import 'package:class_manager/widgets/header.dart';
+import 'package:friday/constants.dart';
+import 'package:friday/widgets/build_classes.dart';
+import 'package:friday/widgets/header.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
@@ -29,7 +29,6 @@ class _ClassesScreenState extends State<ClassesScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     setState(() {
       dateController.text = DateTime.now().toString().split(" ")[0];
@@ -38,7 +37,6 @@ class _ClassesScreenState extends State<ClassesScreen> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     dateController.clear();
     _subjectController.clear();

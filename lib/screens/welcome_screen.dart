@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 ///Project Local Imports
-import 'package:class_manager/constants.dart';
-import 'package:class_manager/screens/login_page.dart';
+import 'package:friday/constants.dart';
+import 'package:friday/screens/login_page.dart';
 
 class WelcomeScreen extends StatefulWidget {
   @override
@@ -91,7 +91,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               right: 100.0,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  primary: Theme.of(context).accentColor,
+                  primary: Theme.of(context).colorScheme.secondary,
                   shape: StadiumBorder(),
                   padding: EdgeInsets.symmetric(vertical: 15),
                 ),

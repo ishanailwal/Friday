@@ -1,13 +1,12 @@
-import 'package:class_manager/models/alert.dart';
-import 'package:class_manager/models/homework.dart';
-import 'package:class_manager/widgets/countdown_painter.dart';
+import 'package:flutter_icons_null_safety/flutter_icons_null_safety.dart';
+import 'package:friday/models/alert.dart';
+import 'package:friday/models/homework.dart';
+import 'package:friday/widgets/countdown_painter.dart';
 import 'package:flutter/material.dart';
-import 'package:class_manager/constants.dart';
-import 'package:class_manager/widgets/header.dart';
-import 'package:class_manager/widgets/recents_alerts.dart';
-import 'package:class_manager/widgets/recents_homeworks.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_icons/flutter_icons.dart';
+import 'package:friday/constants.dart';
+import 'package:friday/widgets/header.dart';
+import 'package:friday/widgets/recents_alerts.dart';
+import 'package:friday/widgets/recents_homeworks.dart';
 import 'package:intl/intl.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -81,7 +80,9 @@ class _HomeScreenState extends State<HomeScreen> {
               Center(
                 child: Text(
                   "View all",
-                  style: TextStyle(color: Theme.of(context).accentColor, fontSize: 15.0),
+                  style: TextStyle(
+                      color: Theme.of(context).colorScheme.secondary,
+                      fontSize: 15.0),
                 ),
               ),
               SizedBox(height: 20.0),
@@ -102,7 +103,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   child: Text(
                     "View all",
-                    style: TextStyle(color: Theme.of(context).accentColor, fontSize: 15.0),
+                    style: TextStyle(
+                        color: Theme.of(context).colorScheme.secondary,
+                        fontSize: 15.0),
                   ),
                   onPressed: () => widget.openHomeworkPage(),
                 ),
@@ -155,11 +158,15 @@ class DataSearch extends SearchDelegate<String> {
   }
 
   @override
-  Widget buildResults(BuildContext context) {}
+  Widget buildResults(BuildContext context) => SizedBox.shrink();
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    final List suggestionList = query.isEmpty ? recentAlerts : recentAlerts.where((p) => p.title.toLowerCase().contains(query.toLowerCase())).toList();
+    final List suggestionList = query.isEmpty
+        ? recentAlerts
+        : recentAlerts
+            .where((p) => p.title.toLowerCase().contains(query.toLowerCase()))
+            .toList();
     if (query.isEmpty) {
       return Center(
         child: Text('Search for the notes here'),
@@ -189,7 +196,8 @@ class DataSearch extends SearchDelegate<String> {
                   itemBuilder: (context, index) {
                     final DateFormat dateFormat = DateFormat("hh:mm a");
                     Alert alert = suggestionList[index];
-                    int hoursLeft = DateTime.now().difference(alert.time).inHours;
+                    int hoursLeft =
+                        DateTime.now().difference(alert.time).inHours;
                     hoursLeft = hoursLeft < 0 ? -hoursLeft : 0;
                     double percent = hoursLeft / 48;
                     return Row(
@@ -200,7 +208,7 @@ class DataSearch extends SearchDelegate<String> {
                           height: 130.0,
                           width: 15.0,
                           decoration: BoxDecoration(
-                            color: Theme.of(context).accentColor,
+                            color: Theme.of(context).colorScheme.secondary,
                             borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(30.0),
                               bottomLeft: Radius.circular(30.0),
@@ -236,7 +244,9 @@ class DataSearch extends SearchDelegate<String> {
                                     children: <Widget>[
                                       Icon(
                                         AntDesign.clockcircle,
-                                        color: Theme.of(context).accentColor,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .secondary,
                                         size: 17.0,
                                       ),
                                       SizedBox(width: 10.0),
@@ -254,7 +264,9 @@ class DataSearch extends SearchDelegate<String> {
                                     children: <Widget>[
                                       Icon(
                                         Icons.receipt,
-                                        color: Theme.of(context).accentColor,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .secondary,
                                         size: 17.0,
                                       ),
                                       SizedBox(width: 10.0),
@@ -281,7 +293,8 @@ class DataSearch extends SearchDelegate<String> {
                                   child: Padding(
                                     padding: EdgeInsets.all(20.0),
                                     child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: <Widget>[
                                         Text(
                                           "$hoursLeft",
@@ -318,7 +331,8 @@ class DataSearch extends SearchDelegate<String> {
                 DateFormat dateFormat = DateFormat("hh:mm a");
 
                 List<dynamic> homeworkMap = list.data;
-                if (!list.hasData) return Center(child: CircularProgressIndicator());
+                if (!list.hasData)
+                  return Center(child: CircularProgressIndicator());
                 if (homeworkMap != null) {
                   if (homeworkMap.isEmpty)
                     return Center(
@@ -334,7 +348,13 @@ class DataSearch extends SearchDelegate<String> {
                   else {
                     List<Homework> recentHomeworks = [];
                     homeworkMap.forEach((element) {
-                      if (element['title'].toString().toLowerCase().contains(query.toLowerCase())) recentHomeworks.add(Homework(title: element['title'], dueTime: DateTime.parse(element['dueDate'])));
+                      if (element['title']
+                          .toString()
+                          .toLowerCase()
+                          .contains(query.toLowerCase()))
+                        recentHomeworks.add(Homework(
+                            title: element['title'],
+                            dueTime: DateTime.parse(element['dueDate'])));
                     });
                     return Column(
                       children: [
@@ -359,18 +379,22 @@ class DataSearch extends SearchDelegate<String> {
                               children: <Widget>[
                                 Container(
                                   margin: EdgeInsets.only(bottom: 30.0),
-                                  padding: EdgeInsets.fromLTRB(20.0, 20.0, 10.0, 10.0),
+                                  padding: EdgeInsets.fromLTRB(
+                                      20.0, 20.0, 10.0, 10.0),
                                   width: MediaQuery.of(context).size.width - 70,
                                   decoration: BoxDecoration(
                                     color: kCardColor,
                                     borderRadius: BorderRadius.circular(12.0),
                                   ),
                                   child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: <Widget>[
                                       Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: <Widget>[
                                           Container(
                                             width: 100,
@@ -388,7 +412,9 @@ class DataSearch extends SearchDelegate<String> {
                                             children: <Widget>[
                                               Icon(
                                                 AntDesign.clockcircle,
-                                                color: Theme.of(context).accentColor,
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .secondary,
                                                 size: 17.0,
                                               ),
                                               SizedBox(width: 10.0),
@@ -426,7 +452,7 @@ class DataSearch extends SearchDelegate<String> {
   }
 
   _getColor(BuildContext context, double percent) {
-    if (percent >= 0.4) return Theme.of(context).accentColor;
+    if (percent >= 0.4) return Theme.of(context).colorScheme.secondary;
 
     return kHourColor;
   }
@@ -440,9 +466,11 @@ class DataSearch extends SearchDelegate<String> {
       },
       style: ElevatedButton.styleFrom(
         shape: CircleBorder(
-          side: BorderSide(color: Theme.of(context).accentColor),
+          side: BorderSide(color: Theme.of(context).colorScheme.secondary),
         ),
-        primary: homework.isDone ? Theme.of(context).accentColor : Colors.transparent,
+        primary: homework.isDone
+            ? Theme.of(context).colorScheme.secondary
+            : Colors.transparent,
       ),
       child: homework.isDone ? Icon(Icons.check, color: Colors.white) : null,
     );

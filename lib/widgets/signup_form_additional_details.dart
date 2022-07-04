@@ -1,11 +1,9 @@
-import 'package:class_manager/models/users.dart';
-import 'package:class_manager/screens/login_page.dart';
-import 'package:class_manager/services/auth_error_msg_toast.dart';
-import 'package:class_manager/services/classes_db_services.dart';
-import 'package:class_manager/services/user_info_services.dart';
-import 'package:class_manager/widgets/auth_input_form_field.dart';
+import 'package:friday/models/users.dart';
+import 'package:friday/services/auth_error_msg_toast.dart';
+import 'package:friday/services/classes_db_services.dart';
+import 'package:friday/services/user_info_services.dart';
+import 'package:friday/widgets/auth_input_form_field.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -15,7 +13,6 @@ import '../constants.dart';
 import 'bottom_navigation.dart';
 
 class SignUpFormAdditionalDetails extends StatefulWidget {
-
   SignUpFormAdditionalDetails();
 
   @override
@@ -105,7 +102,6 @@ class _SignUpFormAdditionalDetailsState
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     _year.dispose();
     _age.dispose();

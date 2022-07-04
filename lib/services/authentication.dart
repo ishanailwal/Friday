@@ -1,15 +1,14 @@
-import 'package:class_manager/screens/login_page.dart';
-import 'package:class_manager/screens/signup_additional_details_screen.dart';
-import 'package:class_manager/services/user_info_services.dart';
-import 'package:class_manager/widgets/auth_handling_widget.dart';
+import 'package:friday/screens/login_page.dart';
+import 'package:friday/screens/signup_additional_details_screen.dart';
+import 'package:friday/services/user_info_services.dart';
+import 'package:friday/widgets/auth_handling_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 /// Project Imports
-import 'package:class_manager/screens/onboarding_page.dart';
-import 'package:class_manager/widgets/bottom_navigation.dart';
+import 'package:friday/screens/onboarding_page.dart';
+import 'package:friday/widgets/bottom_navigation.dart';
 import 'package:provider/provider.dart';
 
 class AuthenticationService {
@@ -58,24 +57,22 @@ class AuthenticationService {
             Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(builder: (_) => SignUpAdditionalDetails()),
-                  (Route<dynamic> route) => false,
+              (Route<dynamic> route) => false,
             );
 
             showDialog(
                 context: context,
                 builder: (context) => AlertDialog(
-                  backgroundColor: Colors.black38,
-                  title: Text(
-                    "You are one step away from successful Log-In",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  content: Text(
-                    "Please Fill the Form to Complete Log-in",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ));
-
-
+                      backgroundColor: Colors.black38,
+                      title: Text(
+                        "You are one step away from successful Log-In",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      content: Text(
+                        "Please Fill the Form to Complete Log-in",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ));
           } else {
             // Navigate to Dashboard
             Navigator.pushAndRemoveUntil(
@@ -87,16 +84,16 @@ class AuthenticationService {
             showDialog(
                 context: context,
                 builder: (context) => AlertDialog(
-                  backgroundColor: Colors.black38,
-                  title: Text(
-                    "Log-in Complete",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  content: Text(
-                    "Enjoy this app",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ));
+                      backgroundColor: Colors.black38,
+                      title: Text(
+                        "Log-in Complete",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      content: Text(
+                        "Enjoy this app",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ));
           }
         } else {
           print("Login Error: Undefined Error!");
@@ -165,13 +162,13 @@ class AuthenticationService {
             "signUpEmail succeeded \n Credentials of user=>Email: ${user.email} and  UID: ${user.uid}");
 
         // Add the name of user
-        await user.updateProfile(displayName: name);
+        await user.updateDisplayName(name);
         // Set essential details to [UserInfoServices]
         Provider.of<UserInfoServices>(context, listen: false)
             .setEssentialDetailsOfUser(name, email);
         // Navigate to Addtional Details Form
 
-        user.sendEmailVerification();// Send Email Verification
+        user.sendEmailVerification(); // Send Email Verification
 
         FirebaseAuth.instance
             .signOut(); // Without that, If User Sign-Up, then close and reopen the app, can navigate to the
